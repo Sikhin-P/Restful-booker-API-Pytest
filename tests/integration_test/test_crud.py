@@ -14,6 +14,7 @@ class TestCRUD:
                                 payload=payload_manager.payload_create_token(), in_json=False)
         verify_json_key_is_present(response.json()['token'])
         verify_https_status_code(response, 200)
+        pytest.auth_token = response.json()['token']
         return response.json()['token']
 
     def test_create_booking(self):
@@ -21,24 +22,21 @@ class TestCRUD:
                                 headers=common_headers_json(), payload=payload_create_booking(), in_json=False)
         verify_json_key_is_present(response.json()['bookingid'])
         verify_https_status_code(response, 200)
+        pytest.booking_id = str(response.json()['bookingid'])
         return response.json()['bookingid']
 
     def test_update_booking(self):
-        token = self.test_create_token()
-        booking_id = str(self.test_create_booking())
-        url = patch_put_delete_booking_url(booking_id)
+        url = patch_put_delete_booking_url(pytest.booking_id)
         header = common_headers_json()
-        header['Cookie'] = 'token=' + token
+        header['Cookie'] = 'token=' + pytest.auth_token
         response = put_request(url=url, auth=None, headers=header,
                                payload=payload_update_booking(), in_json=False)
         verify_https_status_code(response, 200)
 
     def test_delete_booking(self):
-        token = self.test_create_token()
-        booking_id = str(self.test_create_booking())
-        url = patch_put_delete_booking_url(booking_id)
+        url = patch_put_delete_booking_url(pytest.booking_id)
         header = common_headers_json()
-        header['Cookie'] = 'token=' + token
+        header['Cookie'] = 'token=' + pytest.auth_token
         response = delete_request(url=url, auth=None, headers=header,
                                   in_json=False)
         verify_https_status_code(response, 201)
