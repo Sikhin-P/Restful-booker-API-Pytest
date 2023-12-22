@@ -4,10 +4,10 @@ agent any
 stages{
 stage('Run Test'){
 steps{
-sh 'set path="C:/Users/sikhi/AppData/Local/Programs/Python/Python312"'
-sh 'set path="C:/Users/sikhi/AppData/Local/Programs/Python/Python312/Scripts"'
-sh 'pip install -r requirements.txt'
-sh 'pytest tests/integration_test/test_crud.py'
+bat '''set path="C:/Users/sikhi/AppData/Local/Programs/Python/Python312"'
+      set path="C:/Users/sikhi/AppData/Local/Programs/Python/Python312/Scripts"'
+      pip install -r requirements.txt'
+      pytest tests/integration_test/test_crud.py'''
 }
 }
 }
