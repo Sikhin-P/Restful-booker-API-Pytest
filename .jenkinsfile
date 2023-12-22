@@ -3,10 +3,10 @@ pipeline
 agent any
 stage('Run Test'){
 steps{
-sh 'set path="C:\Users\sikhi\AppData\Local\Programs\Python\Python312"'
-sh 'set path="C:\Users\sikhi\AppData\Local\Programs\Python\Python312\Scripts"'
+sh 'set path="C:/Users/sikhi/AppData/Local/Programs/Python/Python312"'
+sh 'set path="C:/Users/sikhi/AppData/Local/Programs/Python/Python312/Scripts"'
 sh 'pip install -r requirements.txt'
-sh 'pytest tests\integration_test\test_crud.py'
+sh 'pytest tests/integration_test/test_crud.py'
 }
 }
 }
