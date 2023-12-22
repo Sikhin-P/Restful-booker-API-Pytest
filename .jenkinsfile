@@ -9,6 +9,16 @@ set path="C:/Users/sikhi/AppData/Local/Programs/Python/Python312/Scripts"
 pip install -r requirements.txt
 pytest ./tests/integration_test/test_crud.py --html=report.html --alluredir=reports'''
 }
+post{
+success { allure([
+                    includeProperties: false,
+                    jdk: '',
+                    properties: [],
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'reports']]
+                ])
+            }
+}
 }
 }
 }
